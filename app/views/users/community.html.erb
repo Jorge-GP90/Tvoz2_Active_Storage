@@ -1,0 +1,34 @@
+<h1>Users#community</h1>
+
+
+    <p> Hello <%= current_user.name%>!</p> <br>
+    <p> Meet the community and connect with all!</p> <br>
+  
+
+
+<table class="table" style="background-color:DodgerBlue;">
+  <tbody>
+    <% @users.each do |user| %>
+    <tr class="user_management">
+      <td class= "text-justify"><%= user.id %></td>
+      <td class= "text-justify"><%= user.name %></td>
+      <td class= "text-justify"><%= user.avatar %></td>
+      <td class= "text-justify"><%= user.email %></td>
+      <td class= "text-justify"><%= user.role %></td>
+      <td class= "text-justify"><%= user.admin? ? 'Admin' : 'none' %></td>
+      <td class= "text-justify">
+         
+      </td>
+
+      <td class= "text-justify">
+        <%= link_to "Show", user_path(user.id),  class: "btn btn-outline-primary show-btn" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<br>
+<%= link_to 'New Task', new_task_path %> |
+<%= link_to 'Home top', root_path %>

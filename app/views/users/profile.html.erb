@@ -1,0 +1,105 @@
+
+<h1>Profile</h1>
+
+
+
+  <%if current_user %>
+    <p> Hello <%= current_user.name%>!</p> <br>
+    <p> Your  email is: <%= current_user.email %>!</p> <br>
+    <p> your Roll is: <%= current_user.role %>!</p> <br>
+    <p> Admin: <%= current_user.admin %>!</p> <br>
+  <% else %>
+    <h5>Enjoy Speaking<br>Pronuntiation APP</h5>
+    <h1>Welcome to Tvoz</h1>
+  <% end %>
+
+<hr>
+
+<table class="table">
+  <tbody>
+    <tr class="user_management">
+      <td class= "text-justify"><%= current_user.name %></td>
+      <%# <td class= "text-justify"><%= current_user.avatar %>
+      <%# </td>  %>
+      <td class= "text-justify"><%= current_user.email %></td>
+      <td class= "text-justify"><%= current_user.role %></td>
+      <td class= "text-justify">Following:  <%= current_user.follower_user.count %> </td>
+      <td class= "text-justify">Followers:  <%= current_user.followed_user.count %></td>
+      <td class= "text-justify"><%= current_user.admin? ? 'Admin' : 'none' %></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>Follower id</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.follower_user.each do |rel| %>
+      <tr>
+        <td><%= rel.id %></td>
+        <td><%= rel.name %></td>
+        <td><%= rel.role %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# <%= render 'follow_form', user: user, id: 'myfollows'%> 
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>Follower Id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.followed.each do |rel| %>
+      <tr>
+        <td><%= rel.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th> My Follow Id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.follower.each do |rel| %>
+      <tr>
+        <td><%= rel.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
+<br>
+
+
+
+
+<hr>
+<br>
+
+
+<%= link_to 'Edit', edit_user_registration_path(current_user.id) %> |
+<%= link_to 'community', community_user_path(current_user.id) %> | 
+<%= link_to 'Home', root_path %>
